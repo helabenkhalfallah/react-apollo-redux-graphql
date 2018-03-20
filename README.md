@@ -63,4 +63,4 @@ npm install apollo-client apollo-cache-inmemory apollo-link-http react-apollo gr
 
 11. create an AppApolloClient.js class
 12. Results :
-![Screenshot](./assets/images/appolo_connect_1.png) 
+![Screenshot](./src/assets/images/appolo_connect_1.png) 
