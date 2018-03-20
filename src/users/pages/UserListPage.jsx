@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
+import { connect, compose } from 'react-redux'
+
+// app import
 import UserListQueries from '../graphql/UserListQueries'
 import AppCommonModule from '../../commons/index'
 import UserList from '../components/UserList'
@@ -75,8 +78,22 @@ class UserListPage extends Component {
   }
 }
 
+// redux config
+const mapStateToProps = state => ({})
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
 // graphql wrapper
-export default graphql(UserListQueries, {
+/* export default graphql(UserListQueries, {
   name: 'userListQueries',
   options: { pollInterval: process.env.REACT_APP_REFETCH_USERS_INTERVAL },
-})(UserListPage)
+})(UserListPage) */
+
+export default compose(
+  graphql(UserListQueries, {
+    name: 'userListQueries',
+    options: { pollInterval: process.env.REACT_APP_REFETCH_USERS_INTERVAL },
+  }),
+  connect(mapStateToProps, mapDispatchToProps),
+)(UserListPage)
