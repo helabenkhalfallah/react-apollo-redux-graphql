@@ -20,9 +20,9 @@ class UserListPage extends Component {
 
   // initial state
   state = {
-    /* error: {
-       message: '',
-     }, */
+    /* users: this.props.userListQueries.users,
+    error: this.props.userListQueries.error,
+    loading: this.props.userListQueries.loading, */
   }
 
   // did mount staff
@@ -40,31 +40,34 @@ class UserListPage extends Component {
   // to avoid unnecessary
   // render (reconcilation)
   render() {
-    // log values
-    AppCommonModule.AppLogger.info('UserListPage userListQueries allUsersQuery : ', this.props.userListQueries)
-    AppCommonModule.AppLogger.info('UserListPage userListQueries loading : ', this.props.userListQueries.loading)
-    AppCommonModule.AppLogger.info('UserListPage userListQueries error : ', this.props.userListQueries.error)
-    AppCommonModule.AppLogger.info('UserListPage userListQueries users : ', this.props.userListQueries.users)
+    // get params
+    const { users, error, loading } = this.props.userListQueries
 
-    // emtpy status
-    if (!this.props.userListQueries || !this.props.userListQueries.users) {
-      return <AppCommonModule.EmptyPage />
+    // log values
+    AppCommonModule.AppLogger.info('UserListPage state allUsersQuery : ', this.props.userListQueries)
+    AppCommonModule.AppLogger.info('UserListPage state loading : ', loading)
+    AppCommonModule.AppLogger.info('UserListPage state error : ', error)
+    AppCommonModule.AppLogger.info('UserListPage state users : ', users)
+
+    // loading status
+    if (loading) {
+      return <AppCommonModule.LoadingPage />
     }
 
     // error status
-    if (this.props.userListQueries.error) {
+    if (error) {
       return <AppCommonModule.ErrorPage />
     }
 
-    // loading status
-    if (this.props.userListQueries.loading) {
-      return <AppCommonModule.LoadingPage />
+    // emtpy status
+    if (!users) {
+      return <AppCommonModule.EmptyPage />
     }
 
     // render users
     return (
       <div>
-        <UserList users={this.props.userListQueries.users} />
+        <UserList users={users} />
       </div >
     )
   }
