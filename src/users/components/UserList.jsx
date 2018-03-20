@@ -29,7 +29,7 @@ const UserList = ({ users }) => {
 
 // prop type validation
 UserList.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  users: PropTypes.array.isRequired,
 }
 
 export default UserList

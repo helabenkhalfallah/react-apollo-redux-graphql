@@ -10,12 +10,12 @@ import AppCommonModule from '../../commons/index'
 class UserListPage extends Component {
   // default props
   static defaultProps = {
-    userListQueries: [],
+    userListQueries: null,
   };
 
   // propsType (validation)
   static propTypes = {
-    userListQueries: PropTypes.arrayOf(PropTypes.object),
+    userListQueries: PropTypes.object,
   };
 
   // initial state

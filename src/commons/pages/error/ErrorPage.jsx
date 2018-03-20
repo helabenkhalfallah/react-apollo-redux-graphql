@@ -8,7 +8,7 @@ const ErrorPage = ({ error }) => (
 
 // prop type validation
 ErrorPage.propTypes = {
-  error: PropTypes.objectOf(PropTypes.object).isRequired,
+  error: PropTypes.object.isRequired,
 }
 
 export default ErrorPage
