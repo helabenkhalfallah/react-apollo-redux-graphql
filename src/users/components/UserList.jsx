@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import AppCommonModule from '../../commons/index'
 
@@ -14,7 +14,7 @@ const UserList = ({ users }) => {
 
   // render only if data
   return (
-    <div>
+    <Fragment>
       <ul >
         {users.map(item => (
           <li key={item.id}>
@@ -23,7 +23,7 @@ const UserList = ({ users }) => {
         ))
         }
       </ul >
-    </div>
+    </Fragment>
   )
 }
 

@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
-import UserList from '../components/UserList'
 import UserListQueries from '../graphql/UserListQueries'
 import AppCommonModule from '../../commons/index'
+import UserList from '../components/UserList'
+import UserAdd from '../components/UserAdd'
 
 
 // list page wrap with query
@@ -66,9 +67,10 @@ class UserListPage extends Component {
 
     // render users
     return (
-      <div>
+      <Fragment>
+        <UserAdd />
         <UserList users={users} />
-      </div >
+      </Fragment >
     )
   }
 }
