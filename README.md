@@ -58,3 +58,9 @@ yarn add debug
 AppLogger.js
 
 9. add content inside UserListPage.jsx
+10. install apollo : 
+npm install apollo-client apollo-cache-inmemory apollo-link-http react-apollo graphql-tag graphql ---save
+
+11. create an AppApolloClient.js class
+12. Results :
+![Screenshot](./assets/images/appolo_connect_1.png) 
