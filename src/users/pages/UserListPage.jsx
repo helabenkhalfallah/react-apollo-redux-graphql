@@ -76,5 +76,5 @@ class UserListPage extends Component {
 // graphql wrapper
 export default graphql(UserListQueries, {
   name: 'userListQueries',
-  options: { pollInterval: 20 },
+  options: { pollInterval: process.env.REACT_APP_REFETCH_USERS_INTERVAL },
 })(UserListPage)
