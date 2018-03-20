@@ -6,25 +6,6 @@ import UserListQueries from '../graphql/UserListQueries'
 import AppCommonModule from '../../commons/index'
 
 
-// loading status
-const Loading = () => (
-  <div>Loading</div>
-)
-
-// eror status
-const Error = ({ error }) => (
-  <div>Error : {error} </div>
-)
-// prop type validation
-Error.propTypes = {
-  error: PropTypes.objectOf(PropTypes.object).isRequired,
-}
-
-// eror status
-const Empty = () => (
-  <div>Empty</div>
-)
-
 // list page wrap with query
 class UserListPage extends Component {
   // default props
@@ -66,23 +47,18 @@ class UserListPage extends Component {
     AppCommonModule.AppLogger.info('UserListPage userListQueries users : ', this.props.userListQueries.users)
 
     // emtpy status
-    if (!this.props.userListQueries) {
-      return <Empty />
+    if (!this.props.userListQueries || !this.props.userListQueries.users) {
+      return <AppCommonModule.EmptyPage />
     }
 
     // error status
     if (this.props.userListQueries.error) {
-      return <Error />
+      return <AppCommonModule.ErrorPage />
     }
 
     // loading status
     if (this.props.userListQueries.loading) {
-      return <Loading />
-    }
-
-    // empty status
-    if (!this.props.userListQueries.users) {
-      return <Empty />
+      return <AppCommonModule.LoadingPage />
     }
 
     // render users
