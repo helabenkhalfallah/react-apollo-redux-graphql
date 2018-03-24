@@ -146,3 +146,9 @@ const UsersReducer = (state = 0, action) => {
 ```
 
 ==> this will cause a new render and new refetch.
+==> click => dispatch(addUserAction()) => reducer (proxy) get the appropriate action 
+=> update state => transform state to props => auto render
+
+**Redux act as a Manager, Apollo act as a data provider.**
+*Apollo mutations are monitored and triggered by redux action.*
+*Apollo queries can be scheduled for auto-refetch.*

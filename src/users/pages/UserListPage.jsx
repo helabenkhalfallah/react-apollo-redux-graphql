@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 
 // app module import
 import AppCommonModule from '../../commons/index'
@@ -22,14 +22,14 @@ class UserListPage extends Component {
   // default props
   static defaultProps = {
     userListQueries: null,
-    count: 0,
+    userToAdd: null,
     dispatch: null,
   }
 
   // propsType (validation)
   static propTypes = {
     userListQueries: PropTypes.object,
-    count: PropTypes.number,
+    userToAdd: PropTypes.object,
     dispatch: PropTypes.func,
   }
 
@@ -42,17 +42,22 @@ class UserListPage extends Component {
   componentDidMount() { }
 
   // force refetch
+  // mapStateToProps
   componentWillReceiveProps(nextProps) {
-    if (this.props.count !== nextProps.count) {
+    AppCommonModule.AppLogger.info('UserListPage componentWillReceiveProps nextProps: ', nextProps)
+    if (this.props.userToAdd !== nextProps.userToAdd) {
       this.props.userListQueries.refetch()
     }
   }
 
   // on user add action
-  onUserAddClicked = (e) => {
-    AppCommonModule.AppLogger.info('UserListPage onUserAddClicked : ', e)
-    e.preventDefault()
-    this.props.dispatch(addUserAction())
+  onUserAddClicked = (event, params) => {
+    AppCommonModule.AppLogger.info('UserListPage onUserAddClicked params: ', params)
+    AppCommonModule.AppLogger.info('UserListPage onUserAddClicked event: ', event)
+    if (event && event.preventDefault) {
+      event.preventDefault()
+      this.props.dispatch(addUserAction(params))
+    }
   }
 
   // we pass only necessary props users={this.state.users}
@@ -64,7 +69,6 @@ class UserListPage extends Component {
     const { networkStatus } = this.props.userListQueries
 
     // log values
-    AppCommonModule.AppLogger.info('UserListPage state count : ', this.props.count)
     AppCommonModule.AppLogger.info('UserListPage allUsersQuery : ', this.props.userListQueries)
     AppCommonModule.AppLogger.info('UserListPage loading : ', loading)
     AppCommonModule.AppLogger.info('UserListPage error : ', error)
@@ -89,8 +93,11 @@ class UserListPage extends Component {
     // render users
     return (
       <Fragment>
-        <button onClick={this.onUserAddClicked} />
-        <UserAdd count={this.props.count} />
+        <UserAdd onUserAddClicked={this.onUserAddClicked} />
+        {
+          (this.props.userToAdd && this.props.userToAdd.first_name) &&
+          <span> I change my values when you click on add : {this.props.userToAdd.first_name}</span>
+        }
         <UserList users={users} />
       </Fragment >
     )
@@ -104,10 +111,12 @@ class UserListPage extends Component {
 })(UserListPage) */
 
 // redux config
+// each state change will been transformed
+// to a propos change
 function mapStateToProps(state) {
   AppCommonModule.AppLogger.info('mapStateToProps', state)
   return {
-    count: state ? state[0] : 2,
+    userToAdd: state ? state[0].userToAdd : {},
   }
 }
 

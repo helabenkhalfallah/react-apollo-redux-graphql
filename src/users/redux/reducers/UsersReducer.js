@@ -1,15 +1,23 @@
 // UsersReducer.js
 import UserActionTypes from '../actions/UserActionTypes'
+import AppCommonModule from '../../../commons/index'
+
 
 // user reducer
-const UsersReducer = (state = 0, action) => {
+const UsersReducer = (state = {}, { type, payload }) => {
+  // log parms
+  AppCommonModule.AppLogger.info('passing from UsersReducer ...')
+  AppCommonModule.AppLogger.info('passing from UsersReducer type :', type)
+  AppCommonModule.AppLogger.info('passing from UsersReducer payload :', payload)
   let newState
-  switch (action.type) {
+  switch (type) {
     case UserActionTypes.ADD_USER:
-      newState = state + action.payload
+      newState = {
+        userToAdd: payload,
+      }
       break
     case UserActionTypes.REMOVE_USER:
-      newState = state - action.payload
+      newState = state - payload
       break
     default:
       newState = state
@@ -17,6 +25,8 @@ const UsersReducer = (state = 0, action) => {
   }
 
   // new state
+  AppCommonModule.AppLogger.info('passing from UsersReducer state : ', state)
+  AppCommonModule.AppLogger.info('passing from UsersReducer newState : ', newState)
   return newState
 }
 
