@@ -67,3 +67,82 @@ npm install apollo-client apollo-cache-inmemory apollo-link-http react-apollo gr
 
 13. add redux 
 npm install react-redux --save
+npm install redux --save
+npm install react-router-redux --save 
+npm install history --save
+
+14. UserAdd.jsx : addd a new user.
+15. UserList.jsx display users list.
+16. Connect UserList to redux : 
+
+```jsx
+
+// redux config
+function mapStateToProps(state) {
+  AppCommonModule.AppLogger.info('mapStateToProps', state)
+  return {
+    count: state ? state[0] : 2,
+  }
+}
+
+// users list gql query
+const userListgqlQuery = graphql(UserListQueries, {
+  name: 'userListQueries',
+  // auto refetch option
+  // options: { pollInterval: process.env.REACT_APP_REFETCH_USERS_INTERVAL },
+})
+
+// export module wrapped by gql and redux
+export default compose(
+  userListgqlQuery,
+  connect(mapStateToProps),
+)(UserListPage)
+
+```
+
+17. Force update each time we increment the counter :
+
+```js
+// force refetch
+  componentWillReceiveProps(nextProps) {
+    if (this.props.count !== nextProps.count) {
+      this.props.userListQueries.refetch()
+    }
+  }
+```
+
+18. Test result :
+```js
+// on user add action
+  onUserAddClicked = (e) => {
+    AppCommonModule.AppLogger.info('UserListPage onUserAddClicked : ', e)
+    e.preventDefault()
+    this.props.dispatch(addUserAction())
+  }
+```
+
+```js
+// render users
+    return (
+      <Fragment>
+        <button onClick={this.onUserAddClicked} />
+        <UserAdd count={this.props.count} />
+        <UserList users={users} />
+      </Fragment >
+    )
+```
+onUserAddClicked => will trigger addUserAction redux action.
+The reducer handle this request and update the state according to
+the ActionType :
+
+```js
+// user reducer
+const UsersReducer = (state = 0, action) => {
+  let newState
+  switch (action.type) {
+    case UserActionTypes.ADD_USER:
+      newState = state + action.payload
+      break
+```
+
+==> this will cause a new render and new refetch.

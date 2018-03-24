@@ -1,16 +1,23 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import AppCommonModule from '../../commons/index'
 
-const UserAdd = () => {
+const UserAdd = (props) => {
   // log
-  AppCommonModule.AppLogger.info('UserAdd')
+  AppCommonModule.AppLogger.info('UserAdd props : ', props)
 
   // render
   return (
-    <Fragment>
-      UserAdd
-    </Fragment>
+    <div>
+      <button>{props.count}</button>
+    </div>
   )
+}
+
+// prop type validation
+UserAdd.propTypes = {
+  count: PropTypes.number.isRequired,
+  // onClick: PropTypes.func.isRequired,
 }
 
 export default UserAdd

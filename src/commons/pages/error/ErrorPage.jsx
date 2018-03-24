@@ -1,14 +1,27 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-// eror page
-const ErrorPage = ({ error }) => (
-  <div>Error : {error} </div>
-)
+// app module import
+import AppCommonModule from '../../index'
+
+// error page
+const ErrorPage = ({ message }) => {
+  AppCommonModule.AppLogger.info('ErrorPage  message : ', message)
+  return (
+    <Fragment>
+      <div>Error : {message} </div >
+    </Fragment>
+  )
+}
 
 // prop type validation
 ErrorPage.propTypes = {
-  error: PropTypes.object.isRequired,
+  message: PropTypes.string,
+}
+
+// default prop
+ErrorPage.defaultProps = {
+  message: 'Generale error',
 }
 
 export default ErrorPage

@@ -10,12 +10,15 @@
     "dotenv": "^5.0.1",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
+    "history": "^4.7.2",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",

@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import AppCommonModule from './commons/index'
+import UserModule from './users/index'
 
 // configure env vars
 dotenv.config()
@@ -15,8 +16,10 @@ AppCommonModule.AppLogger.info('REACT_APP_LOG_MAX_FILE: ', process.env.REACT_APP
 AppCommonModule.AppLogger.info('REACT_APP_LOG_DATE_PATTERN: ', process.env.REACT_APP_LOG_DATE_PATTERN)
 
 // render
+const reducers = { reducers: [UserModule.UsersReducer] }
+AppCommonModule.AppLogger.info('Start reducers: ', reducers)
 ReactDOM.render(
-  <AppCommonModule.AppApolloProvider />,
+  <AppCommonModule.AppApolloProvider {...reducers} />,
   document.getElementById('root'),
 )
 registerServiceWorker()
