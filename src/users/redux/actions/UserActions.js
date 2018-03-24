@@ -15,8 +15,14 @@ export const addUserAction = (user) => {
 }
 
 // add user action
-export const removeUserAction = () => ({
-  type: UserActionTypes.REMOVE_USER,
-  payload: 1,
-})
+export const removeUserAction = (user) => {
+  // log input
+  AppCommonModule.AppLogger.info('removeUserAction user :', user)
+
+  // remove user
+  return {
+    type: UserActionTypes.REMOVE_USER,
+    payload: user,
+  }
+}
 

@@ -3,13 +3,25 @@ import PropTypes from 'prop-types'
 import AppCommonModule from '../../commons/index'
 
 // display list
-const UserList = ({ users }) => {
+const UserList = ({ users, error, loading }) => {
   // log users props
-  AppCommonModule.AppLogger.info('UserList props : ', users)
+  AppCommonModule.AppLogger.info('UserList users : ', users)
+  AppCommonModule.AppLogger.info('UserList error : ', error)
+  AppCommonModule.AppLogger.info('UserList loading : ', loading)
 
-  // break if no data available
+  // user list loading status
+  if (loading) {
+    return <AppCommonModule.LoadingPage />
+  }
+
+  // user list error status
+  if (error) {
+    return <AppCommonModule.ErrorPage {...error} />
+  }
+
+  // user list emtpy status
   if (!users) {
-    return null
+    return <AppCommonModule.EmptyPage />
   }
 
   // render only if data
@@ -18,7 +30,7 @@ const UserList = ({ users }) => {
       <ul >
         {users.map(item => (
           <li key={item.id}>
-            {item.first_name} {item.last_name} {item.birthday}
+            {item.firstName} {item.lastName} {item.birthday}
           </li >
         ))
         }
@@ -29,7 +41,16 @@ const UserList = ({ users }) => {
 
 // prop type validation
 UserList.propTypes = {
-  users: PropTypes.array.isRequired,
+  users: PropTypes.array,
+  error: PropTypes.object,
+  loading: PropTypes.bool,
+}
+
+// default prop
+UserList.defaultProps = {
+  users: null,
+  error: null,
+  loading: false,
 }
 
 export default UserList

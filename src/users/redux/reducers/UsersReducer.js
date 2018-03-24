@@ -17,7 +17,9 @@ const UsersReducer = (state = {}, { type, payload }) => {
       }
       break
     case UserActionTypes.REMOVE_USER:
-      newState = state - payload
+      newState = {
+        userToRemove: payload,
+      }
       break
     default:
       newState = state

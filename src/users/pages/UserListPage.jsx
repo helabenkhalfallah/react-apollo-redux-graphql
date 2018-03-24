@@ -2,13 +2,15 @@ import React, { Component, Fragment } from 'react'
 import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { compose, bindActionCreators } from 'redux'
+import { compose } from 'redux'
 
 // app module import
 import AppCommonModule from '../../commons/index'
 
-// gql queries import
+// gql queries & mutations import
 import UserListQueries from '../graphql/UserListQueries'
+import UserMutations from '../graphql/UserMutations'
+
 
 // component import
 import UserList from '../components/UserList'
@@ -23,6 +25,8 @@ class UserListPage extends Component {
   static defaultProps = {
     userListQueries: null,
     userToAdd: null,
+    userToRemove: null,
+    createUser: null,
     dispatch: null,
   }
 
@@ -30,12 +34,17 @@ class UserListPage extends Component {
   static propTypes = {
     userListQueries: PropTypes.object,
     userToAdd: PropTypes.object,
+    userToRemove: PropTypes.object,
+    createUser: PropTypes.func,
     dispatch: PropTypes.func,
   }
 
   // initial state
   state = {
-
+    error: {
+      message: '',
+      networkError: '',
+    },
   }
 
   // did mount staff
@@ -44,61 +53,41 @@ class UserListPage extends Component {
   // force refetch
   // mapStateToProps
   componentWillReceiveProps(nextProps) {
-    AppCommonModule.AppLogger.info('UserListPage componentWillReceiveProps nextProps: ', nextProps)
+    // add new user
     if (this.props.userToAdd !== nextProps.userToAdd) {
-      this.props.userListQueries.refetch()
+      this.addUser(nextProps.userToAdd)
     }
   }
 
   // on user add action
   onUserAddClicked = (event, params) => {
-    AppCommonModule.AppLogger.info('UserListPage onUserAddClicked params: ', params)
-    AppCommonModule.AppLogger.info('UserListPage onUserAddClicked event: ', event)
     if (event && event.preventDefault) {
       event.preventDefault()
       this.props.dispatch(addUserAction(params))
     }
   }
 
-  // we pass only necessary props users={this.state.users}
-  // to avoid unnecessary
-  // render (reconcilation)
+  // add new user
+  addUser = (user) => {
+    this.props.createUser(user)
+      .then(({ data }) => {
+        // force refetch if
+        // user is added with success
+        if (data) {
+          this.props.userListQueries.refetch()
+        }
+      }).catch((error) => {
+        this.setState({ error })
+      })
+  }
+
+  // render
   render() {
-    // get params
-    const { users, error, loading } = this.props.userListQueries
-    const { networkStatus } = this.props.userListQueries
-
-    // log values
-    AppCommonModule.AppLogger.info('UserListPage allUsersQuery : ', this.props.userListQueries)
-    AppCommonModule.AppLogger.info('UserListPage loading : ', loading)
-    AppCommonModule.AppLogger.info('UserListPage error : ', error)
-    AppCommonModule.AppLogger.info('UserListPage users : ', users)
-    AppCommonModule.AppLogger.info('UserListPage networkStatus : ', networkStatus)
-
-    // loading status
-    if (loading) {
-      return <AppCommonModule.LoadingPage />
-    }
-
-    // error status
-    if (error) {
-      return <AppCommonModule.ErrorPage {...error} />
-    }
-
-    // emtpy status
-    if (!users) {
-      return <AppCommonModule.EmptyPage />
-    }
-
     // render users
     return (
       <Fragment>
-        <UserAdd onUserAddClicked={this.onUserAddClicked} />
-        {
-          (this.props.userToAdd && this.props.userToAdd.first_name) &&
-          <span> I change my values when you click on add : {this.props.userToAdd.first_name}</span>
-        }
-        <UserList users={users} />
+        <UserAdd onUserAddClicked={this.onUserAddClicked} error={this.state.error} />
+        <UserList {...this.props.userListQueries} />
       </Fragment >
     )
   }
@@ -127,8 +116,30 @@ const userListgqlQuery = graphql(UserListQueries, {
   // options: { pollInterval: process.env.REACT_APP_REFETCH_USERS_INTERVAL },
 })
 
+// create new user
+const createUserMutation = graphql(UserMutations, {
+  props: ({ mutate }) => ({
+    createUser: ({
+      firstName,
+      lastName,
+      birthday,
+      job,
+    }) =>
+      mutate({
+        variables: {
+          firstName,
+          lastName,
+          birthday,
+          job,
+        },
+      }),
+  }),
+})
+
+
 // export module wrapped by gql and redux
 export default compose(
   userListgqlQuery,
+  createUserMutation,
   connect(mapStateToProps),
 )(UserListPage)

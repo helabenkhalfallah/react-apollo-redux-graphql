@@ -5,8 +5,8 @@ const UserListQueries = gql`
     query UserListQueries{
       users{
         id,
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         birthday,
         job
       }
