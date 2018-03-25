@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
+// import { connect } from 'react-redux'
+// import { compose } from 'redux'
 
 // app module import
 import AppCommonModule from '../../commons/index'
 
 // gql queries & mutations import
+import withApolloRedux from '../../commons/hocs/withApolloRedux'
 import UserListQueries from '../graphql/UserListQueries'
 import UserMutations from '../graphql/UserMutations'
 
@@ -55,7 +56,7 @@ class UserListPage extends Component {
   componentWillReceiveProps(nextProps) {
     // add new user
     if (this.props.userToAdd !== nextProps.userToAdd) {
-      // this.addUser(nextProps.userToAdd)
+      this.addUser(nextProps.userToAdd)
     }
   }
 
@@ -122,7 +123,7 @@ const userListgqlQuery = graphql(UserListQueries, {
   // options: { pollInterval: process.env.REACT_APP_REFETCH_USERS_INTERVAL },
 })
 
-// create new user
+// reate user mutation
 const createUserMutation = graphql(UserMutations, {
   props: ({ mutate }) => ({
     createUser: ({
@@ -142,10 +143,14 @@ const createUserMutation = graphql(UserMutations, {
   }),
 })
 
-
 // export module wrapped by gql and redux
-export default compose(
+/* export default compose(
   userListgqlQuery,
   createUserMutation,
   connect(mapStateToProps),
-)(UserListPage)
+)(UserListPage) */
+
+// HOC for apollo
+const queries = { queries: [userListgqlQuery] }
+const mutations = { mutations: [createUserMutation] }
+export default withApolloRedux(queries, mutations, mapStateToProps, UserListPage)
