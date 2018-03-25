@@ -10,6 +10,8 @@ import AppCommonModule from '../../commons/index'
 // gql queries & mutations import
 import withApolloRedux from '../../commons/hocs/withApolloRedux'
 import withGraphQL from '../../commons/hocs/withGraphQL'
+import withQueries from '../../commons/hocs/withQueries'
+import withMutations from '../../commons/hocs/withMutations'
 import UserListQueries from '../graphql/UserListQueries'
 import UserMutations from '../graphql/UserMutations'
 
@@ -175,7 +177,10 @@ const createUserMutation = withGraphQL(UserMutations, {
   connect(mapStateToProps),
 )(UserListPage) */
 
-// HOC for apollo
-const queries = { queries: [userListgqlQuery] }
-const mutations = { mutations: [createUserMutation] }
-export default withApolloRedux(queries, mutations, mapStateToProps, UserListPage)
+// HOCs for apollo, redux & gql
+export default withApolloRedux(
+  withQueries([userListgqlQuery]),
+  withMutations([createUserMutation]),
+  mapStateToProps,
+  UserListPage,
+)
