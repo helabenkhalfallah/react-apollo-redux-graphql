@@ -1,11 +1,11 @@
 // AddUserAction.js
 import UserActionTypes from '../actions/UserActionTypes'
-import AppCommonModule from '../../../commons/index'
+import AppLogger from '../../../commons/logger/AppLogger'
 
 // add user action
 export const addUserAction = (user) => {
   // log input
-  AppCommonModule.AppLogger.info('addUserAction user :', user)
+  AppLogger.info('addUserAction user :', user)
 
   // add user
   return {
@@ -17,7 +17,7 @@ export const addUserAction = (user) => {
 // add user action
 export const removeUserAction = (user) => {
   // log input
-  AppCommonModule.AppLogger.info('removeUserAction user :', user)
+  AppLogger.info('removeUserAction user :', user)
 
   // remove user
   return {

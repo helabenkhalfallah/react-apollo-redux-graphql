@@ -1,19 +1,16 @@
-// only export modules
-import AppLogger from './logger/AppLogger'
 import NotFoundPage from './pages/notfound/NotFoundPage'
-import AppApolloProvider from './apollo/AppApolloProvider'
 import EmptyPage from './pages/empty/EmptyPage'
 import ErrorPage from './pages/error/ErrorPage'
 import LoadingPage from './pages/loading/LoadingPage'
+import Button from './components/button/Button'
 
 // multiple pages export
-const AppCommonModule = {
-  AppLogger,
+const AppCoreModule = {
   NotFoundPage,
-  AppApolloProvider,
   EmptyPage,
   ErrorPage,
   LoadingPage,
+  Button,
 }
 
-export default AppCommonModule
+export default AppCoreModule

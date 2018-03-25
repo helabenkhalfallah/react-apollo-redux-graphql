@@ -7,12 +7,12 @@ import PropTypes from 'prop-types'
 import Routes from '../../routes/Routes'
 import AppApolloClient from './AppApolloClient'
 import AppReduxStore from '../redux/AppReduxStore'
-import AppCommonModule from '../index'
+import AppLogger from '../logger/AppLogger'
 
 
 // define a Appolo Provider
 const AppApolloProvider = ({ reducers }) => {
-  AppCommonModule.AppLogger.info('AppApolloProvider reducers: ', reducers)
+  AppLogger.info('AppApolloProvider reducers: ', reducers)
   return (
     <ApolloProvider client={AppApolloClient} >
       <Provider store={AppReduxStore(...reducers)}>

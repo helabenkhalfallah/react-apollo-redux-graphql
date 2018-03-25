@@ -2,11 +2,11 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 // app module import
-import AppCommonModule from '../../index'
+import AppLogger from '../../../commons/logger/AppLogger'
 
 // error page
 const ErrorPage = ({ message }) => {
-  AppCommonModule.AppLogger.info('ErrorPage  message : ', message)
+  AppLogger.info('ErrorPage  message : ', message)
   return (
     <Fragment>
       <div>Error : {message} </div >

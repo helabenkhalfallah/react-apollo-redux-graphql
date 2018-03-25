@@ -79,7 +79,7 @@ npm install history --save
 
 // redux config
 function mapStateToProps(state) {
-  AppCommonModule.AppLogger.info('mapStateToProps', state)
+  AppLogger.info('mapStateToProps', state)
   return {
     count: state ? state[0] : 2,
   }
@@ -115,7 +115,7 @@ export default compose(
 ```js
 // on user add action
   onUserAddClicked = (e) => {
-    AppCommonModule.AppLogger.info('UserListPage onUserAddClicked : ', e)
+    AppLogger.info('UserListPage onUserAddClicked : ', e)
     e.preventDefault()
     this.props.dispatch(addUserAction())
   }
@@ -152,3 +152,7 @@ const UsersReducer = (state = 0, action) => {
 **Redux act as a Manager, Apollo act as a data provider.**
 *Apollo mutations are monitored and triggered by redux action.*
 *Apollo queries can be scheduled for auto-refetch.*
+
+19. install styled components :
+npm install --save styled-components
+

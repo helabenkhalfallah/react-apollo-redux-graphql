@@ -3,23 +3,24 @@ import ReactDOM from 'react-dom'
 import dotenv from 'dotenv'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
-import AppCommonModule from './commons/index'
+import AppLogger from './commons/logger/AppLogger'
+import AppApolloProvider from './commons/apollo/AppApolloProvider'
 import UserModule from './users/index'
 
 // configure env vars
 dotenv.config()
-AppCommonModule.AppLogger.info('REACT_APP_GRAPHQL_PATH: ', process.env.REACT_APP_GRAPHQL_PATH)
-AppCommonModule.AppLogger.info('REACT_APP_LOG_DIR_NAME: ', process.env.REACT_APP_LOG_DIR_NAME)
-AppCommonModule.AppLogger.info('REACT_APP_LOG_FILE_NAME: ', process.env.REACT_APP_LOG_FILE_NAME)
-AppCommonModule.AppLogger.info('REACT_APP_LOG_MAX_SIZE: ', process.env.REACT_APP_LOG_MAX_SIZE)
-AppCommonModule.AppLogger.info('REACT_APP_LOG_MAX_FILE: ', process.env.REACT_APP_LOG_MAX_FILE)
-AppCommonModule.AppLogger.info('REACT_APP_LOG_DATE_PATTERN: ', process.env.REACT_APP_LOG_DATE_PATTERN)
+AppLogger.info('REACT_APP_GRAPHQL_PATH: ', process.env.REACT_APP_GRAPHQL_PATH)
+AppLogger.info('REACT_APP_LOG_DIR_NAME: ', process.env.REACT_APP_LOG_DIR_NAME)
+AppLogger.info('REACT_APP_LOG_FILE_NAME: ', process.env.REACT_APP_LOG_FILE_NAME)
+AppLogger.info('REACT_APP_LOG_MAX_SIZE: ', process.env.REACT_APP_LOG_MAX_SIZE)
+AppLogger.info('REACT_APP_LOG_MAX_FILE: ', process.env.REACT_APP_LOG_MAX_FILE)
+AppLogger.info('REACT_APP_LOG_DATE_PATTERN: ', process.env.REACT_APP_LOG_DATE_PATTERN)
 
 // render
 const reducers = { reducers: [UserModule.UsersReducer] }
-AppCommonModule.AppLogger.info('Start reducers: ', reducers)
+AppLogger.info('Start reducers: ', reducers)
 ReactDOM.render(
-  <AppCommonModule.AppApolloProvider {...reducers} />,
+  <AppApolloProvider {...reducers} />,
   document.getElementById('root'),
 )
 registerServiceWorker()

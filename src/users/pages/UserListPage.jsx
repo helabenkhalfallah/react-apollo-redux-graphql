@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 // import { compose } from 'redux'
 
 // app module import
-import AppCommonModule from '../../commons/index'
+import AppCoreModule from '../../commons/logger/AppLogger'
 
 // HOCs import
 import withApolloRedux from '../../commons/hocs/withApolloRedux'
@@ -115,7 +115,7 @@ class UserListPage extends Component {
 // each state change will been transformed
 // to a propos change
 function mapStateToProps(state) {
-  AppCommonModule.AppLogger.info('mapStateToProps', state)
+  AppCoreModule.info('mapStateToProps', state)
   return {
     userToAdd: state ? state[0].userToAdd : {},
   }

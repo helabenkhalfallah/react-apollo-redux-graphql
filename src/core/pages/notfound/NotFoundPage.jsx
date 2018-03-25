@@ -1,5 +1,5 @@
 // not found page
-import React from 'react';
+import React from 'react'
 
 const NotFoundPage = () => (
   <div>

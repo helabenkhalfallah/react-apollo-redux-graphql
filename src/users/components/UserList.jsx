@@ -1,27 +1,28 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import AppCommonModule from '../../commons/index'
+import AppLogger from '../../commons/logger/AppLogger'
+import AppCoreModule from '../../core/index'
 
 // display list
 const UserList = ({ users, error, loading }) => {
   // log users props
-  AppCommonModule.AppLogger.info('UserList users : ', users)
-  AppCommonModule.AppLogger.info('UserList error : ', error)
-  AppCommonModule.AppLogger.info('UserList loading : ', loading)
+  AppLogger.info('UserList users : ', users)
+  AppLogger.info('UserList error : ', error)
+  AppLogger.info('UserList loading : ', loading)
 
   // user list loading status
   if (loading) {
-    return <AppCommonModule.LoadingPage />
+    return <AppCoreModule.LoadingPage />
   }
 
   // user list error status
   if (error) {
-    return <AppCommonModule.ErrorPage {...error} />
+    return <AppCoreModule.ErrorPage {...error} />
   }
 
   // user list emtpy status
   if (!users) {
-    return <AppCommonModule.EmptyPage />
+    return <AppCoreModule.EmptyPage />
   }
 
   // render only if data

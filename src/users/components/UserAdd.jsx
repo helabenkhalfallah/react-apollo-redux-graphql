@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AppCommonModule from '../../commons/index'
+import AppLogger from '../../commons/logger/AppLogger'
+import AppCoreModule from '../../core/index'
 
 const UserAdd = (props) => {
   // log
-  AppCommonModule.AppLogger.info('UserAdd props : ', props)
+  AppLogger.info('UserAdd props : ', props)
 
   // user to be filled from form
   const currentUser = {
@@ -21,13 +22,13 @@ const UserAdd = (props) => {
 
   // render error
   if (props.error && props.error.message) {
-    return <AppCommonModule.ErrorPage {...props.error} />
+    return <AppCoreModule.ErrorPage {...props.error} />
   }
 
   // render only if not error
   return (
     <div>
-      <button onClick={onUserAddClick}>Click Me To Add User</button>
+      <AppCoreModule.Button onClick={onUserAddClick} primary={false}>Click Me To Add User</AppCoreModule.Button>
     </div >
   )
 }
