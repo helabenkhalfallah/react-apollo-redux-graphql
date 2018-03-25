@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { graphql } from 'react-apollo'
+// import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
 // import { connect } from 'react-redux'
 // import { compose } from 'redux'
@@ -9,6 +9,7 @@ import AppCommonModule from '../../commons/index'
 
 // gql queries & mutations import
 import withApolloRedux from '../../commons/hocs/withApolloRedux'
+import withGraphQL from '../../commons/hocs/withGraphQL'
 import UserListQueries from '../graphql/UserListQueries'
 import UserMutations from '../graphql/UserMutations'
 
@@ -117,14 +118,38 @@ function mapStateToProps(state) {
 }
 
 // users list gql query
-const userListgqlQuery = graphql(UserListQueries, {
+/* const userListgqlQuery = graphql(UserListQueries, {
+  name: 'userListQueries',
+  // auto refetch option
+  // options: { pollInterval: process.env.REACT_APP_REFETCH_USERS_INTERVAL },
+}) */
+const userListgqlQuery = withGraphQL(UserListQueries, {
   name: 'userListQueries',
   // auto refetch option
   // options: { pollInterval: process.env.REACT_APP_REFETCH_USERS_INTERVAL },
 })
 
 // reate user mutation
-const createUserMutation = graphql(UserMutations, {
+/* const createUserMutation = graphql(UserMutations, {
+  props: ({ mutate }) => ({
+    createUser: ({
+      firstName,
+      lastName,
+      birthday,
+      job,
+    }) =>
+      mutate({
+        variables: {
+          firstName,
+          lastName,
+          birthday,
+          job,
+        },
+      }),
+  }),
+}) */
+
+const createUserMutation = withGraphQL(UserMutations, {
   props: ({ mutate }) => ({
     createUser: ({
       firstName,
