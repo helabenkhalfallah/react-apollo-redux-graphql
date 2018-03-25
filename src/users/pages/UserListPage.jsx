@@ -55,7 +55,7 @@ class UserListPage extends Component {
   componentWillReceiveProps(nextProps) {
     // add new user
     if (this.props.userToAdd !== nextProps.userToAdd) {
-      this.addUser(nextProps.userToAdd)
+      // this.addUser(nextProps.userToAdd)
     }
   }
 
@@ -63,7 +63,13 @@ class UserListPage extends Component {
   onUserAddClicked = (event, params) => {
     if (event && event.preventDefault) {
       event.preventDefault()
+
+      // mutation redux workflow
       this.props.dispatch(addUserAction(params))
+
+      // direct apollo mutation call
+      // without reudx workflow
+      // this.addUser(params)
     }
   }
 
