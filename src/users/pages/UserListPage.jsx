@@ -7,11 +7,13 @@ import PropTypes from 'prop-types'
 // app module import
 import AppCommonModule from '../../commons/index'
 
-// gql queries & mutations import
+// HOCs import
 import withApolloRedux from '../../commons/hocs/withApolloRedux'
 import withGraphQL from '../../commons/hocs/withGraphQL'
 import withQueries from '../../commons/hocs/withQueries'
 import withMutations from '../../commons/hocs/withMutations'
+
+// gql queries & mutations import
 import UserListQueries from '../graphql/UserListQueries'
 import UserMutations from '../graphql/UserMutations'
 

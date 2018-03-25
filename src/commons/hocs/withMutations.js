@@ -1,3 +1,4 @@
+// mutations factory
 // export gql mutations to adequate format
 const withMutations = (gqlMutations) => {
   // render gql queries

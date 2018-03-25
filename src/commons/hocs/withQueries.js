@@ -1,3 +1,4 @@
+// queries factory
 // export gql queries to adequate format
 const withQueries = (gqlQueries) => {
   // render gql queries
