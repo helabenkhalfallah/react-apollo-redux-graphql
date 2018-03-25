@@ -8,7 +8,7 @@ const UserAdd = (props) => {
 
   // user to be filled from form
   const currentUser = {
-    firstName: 'Ismail223ee',
+    firstName: 'Ismail',
     lastName: 'Ben Hamouda',
     birthday: '25/10/1986',
     job: 'Web lead Developer',
