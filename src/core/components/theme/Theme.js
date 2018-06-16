@@ -1,8 +1,8 @@
-import ThemeButtonProvider from './ThemButton'
+import ThemeDefaultButtonProvider from './ThemeDefaultButton'
 
 // app theme provider
 const ThemeProvider = {
-  ThemeButtonProvider,
+  ThemeDefaultButtonProvider,
 }
 
 export default ThemeProvider

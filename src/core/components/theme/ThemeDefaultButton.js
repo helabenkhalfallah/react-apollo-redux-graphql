@@ -10,7 +10,7 @@ const btDefaultAlign = 'center'
 const btDefaultFont = '1rem "Fira Sans", sans-serif;'
 
 // https://developer.mozilla.org/fr/docs/Web/CSS/font-family
-const btDefaultFamily = 'system-ui, fantasy, monospace, Arial, Georgia, serif'
+const btDefaultFamily = 'fantasy, system-ui, monospace, Arial, Georgia, serif'
 
 // %, rem, em, larger, smaller, ...
 // https://developer.mozilla.org/fr/docs/Web/CSS/font-size
@@ -24,6 +24,18 @@ const btDefaultStyle = 'normal' // default style
 // https://developer.mozilla.org/fr/docs/Web/CSS/font-weight
 const btDefaultWeight = 'lighter' // default style
 
+// default border
+const btDefaultBorder = '0rem'
+
+// default border radius
+const btDefaultRadius = '0rem'
+
+// default margin
+const btDefaultMargin = '0 0 0 0'
+
+// default padding
+const btDefaultPadding = '0 0 0 0'
+
 
 // default theme
 const defaultTheme = {
@@ -36,11 +48,15 @@ const defaultTheme = {
   btDefaultSize,
   btDefaultStyle,
   btDefaultWeight,
+  btDefaultBorder,
+  btDefaultRadius,
+  btDefaultMargin,
+  btDefaultPadding,
 }
 
-// app button theme provider
-const ThemeButtonProvider = {
+// app default button theme provider
+const ThemeDefaultButtonProvider = {
   defaultTheme,
 }
 
-export default ThemeButtonProvider
+export default ThemeDefaultButtonProvider

@@ -30,13 +30,28 @@ const UserAdd = (props) => {
 
   // render only if not error
   return (
+    // button props : hcolor, hbackground, halign
+    // hfont, hfamily, hsize, hstyle, hweight,
+    // hborder, hradius, hmargin, hpadding
     <div>
       <Button
         onClick={onUserAddClick}
-        family="fantasy"
+        hcolor="white"
+        hbackground="green"
+        halign="right"
+        hfamily="system-ui"
+        hsize="1.5rem"
+        hstyle="normal"
+        hweight="lighter"
+        hborder="black 10px"
+        hradius="5px"
+        hmargin="15px 5px 5px 15px"
+        hpadding="10px"
       >
         Click Me To Add User
       </Button>
+      <Button primary > Primary me </Button>
+      <Button secondary > Secondary me </Button>
     </div >
   )
 }
