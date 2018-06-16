@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AppLogger from '../../commons/logger/AppLogger'
-import AppCoreModule from '../../core/index'
+import AppLogger from '../../../commons/logger/AppLogger'
+import AppCoreModule from '../../../core/index'
+
+// button
+const { Button } = AppCoreModule
 
 const UserAdd = (props) => {
   // log
@@ -28,7 +31,12 @@ const UserAdd = (props) => {
   // render only if not error
   return (
     <div>
-      <AppCoreModule.Button onClick={onUserAddClick} primary={false}>Click Me To Add User</AppCoreModule.Button>
+      <Button
+        onClick={onUserAddClick}
+        family="fantasy"
+      >
+        Click Me To Add User
+      </Button>
     </div >
   )
 }

@@ -1,6 +1,6 @@
 // AddUserAction.js
 import UserActionTypes from '../actions/UserActionTypes'
-import AppLogger from '../../../commons/logger/AppLogger'
+import AppLogger from '../../../../commons/logger/AppLogger'
 
 // add user action
 export const addUserAction = (user) => {

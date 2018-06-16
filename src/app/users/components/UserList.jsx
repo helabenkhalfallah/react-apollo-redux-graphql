@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import AppLogger from '../../commons/logger/AppLogger'
-import AppCoreModule from '../../core/index'
+import AppLogger from '../../../commons/logger/AppLogger'
+import AppCoreModule from '../../../core/index'
 
 // display list
 const UserList = ({ users, error, loading }) => {

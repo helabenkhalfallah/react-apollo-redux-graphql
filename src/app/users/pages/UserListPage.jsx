@@ -5,13 +5,13 @@ import PropTypes from 'prop-types'
 // import { compose } from 'redux'
 
 // app module import
-import AppCoreModule from '../../commons/logger/AppLogger'
+import AppCoreModule from '../../../commons/logger/AppLogger'
 
 // HOCs import
-import withApolloRedux from '../../commons/hocs/withApolloRedux'
-import withGraphQL from '../../commons/hocs/withGraphQL'
-import withQueries from '../../commons/hocs/withQueries'
-import withMutations from '../../commons/hocs/withMutations'
+import withApolloRedux from '../../../commons/hocs/withApolloRedux'
+import withGraphQL from '../../../commons/hocs/withGraphQL'
+import withQueries from '../../../commons/hocs/withQueries'
+import withMutations from '../../../commons/hocs/withMutations'
 
 // gql queries & mutations import
 import UserListQueries from '../graphql/UserListQueries'

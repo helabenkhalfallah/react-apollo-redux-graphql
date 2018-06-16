@@ -1,6 +1,6 @@
 // UsersReducer.js
 import UserActionTypes from '../actions/UserActionTypes'
-import AppLogger from '../../../commons/logger/AppLogger'
+import AppLogger from '../../../../commons/logger/AppLogger'
 
 
 // user reducer

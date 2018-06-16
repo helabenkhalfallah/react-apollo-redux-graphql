@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import App from '../App'
-import UserModule from '../users/index'
+import UserModule from '../app/users/index'
 import AppCoreModule from '../core/index'
 
 
