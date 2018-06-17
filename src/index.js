@@ -5,7 +5,7 @@ import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import AppLogger from './commons/logger/AppLogger'
 import AppApolloProvider from './commons/apollo/AppApolloProvider'
-import UserModule from './users/index'
+import UserModule from './app/users/index'
 
 // configure env vars
 dotenv.config()
